@@ -13,14 +13,14 @@ except Exception:
 
 Point = Tuple[float, float]
 
-# --------- 사용자 경로 설정 ---------
+# 사용자 경로 설정
 BASE_DIR = r"C:\Users\NOW\Desktop\tongue"
 IMAGES_DIR = os.path.join(BASE_DIR, "image")
 LANDMARKS_DIR = os.path.join(BASE_DIR, "results")
 MAPPING_JSON = os.path.join(BASE_DIR, 'phoneme_mapping.json')
 OUTPUT_DIR = os.path.join(BASE_DIR, 'output')
 
-# --------- 반모음 파일 매핑 (원본 보존) ---------
+# 반모음 파일 매핑
 SEMIVOWEL_FILES = {
     'ㅣ_반모음_혀': {'image': 'iiJ.png', 'landmarks': 'iiJ_manual_landmarks.json'},
     'ㅜ_반모음_혀': {'image': 'eui-uuW.png', 'landmarks': 'eui-uuW_manual_landmarks.json'},
@@ -28,7 +28,7 @@ SEMIVOWEL_FILES = {
     'ㅜ_반모음_입': {'image': 'eui-uuW.png', 'landmarks': 'eui-uuW_mouth_landmarks.json'}
 }
 
-# --------- 이중모음/반모음 확장 규칙 (원본 보존) ---------
+# 이중모음/반모음 확장 규칙
 DIPHTHONG_MAPPING = {
     'ㅕ_혀': ('ㅣ_반모음_혀', 'ㅓ_혀'), 'ㅛ_혀': ('ㅗ_혀','ㅅ_혀'),
     'ㅠ_혀': ('ㅣ_반모음_혀', 'ㅜ_혀'), 'ㅑ_혀': ('ㅣ_반모음_혀', 'ㅏ_혀'),
@@ -45,7 +45,7 @@ DIPHTHONG_MAPPING = {
     'ㅖ_입': ('ㅔ_입')
 }
 
-# --------- 출력 안전용 영문 치환 (원본 보존) ---------
+# 출력 안전용 영문 치환 
 HANGUL_TO_ENGLISH = {
     'ㅏ': 'a', 'ㅓ': 'eo', 'ㅗ': 'o', 'ㅜ': 'u', 'ㅡ': 'eu', 'ㅣ': 'i',
     'ㅑ': 'ya', 'ㅕ': 'yeo', 'ㅛ': 'yo', 'ㅠ': 'yu', 'ㅒ': 'yae', 'ㅖ': 'ye',
@@ -60,7 +60,7 @@ CONSONANTS = {'ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', '�
 VOWELS = {'ㅏ', 'ㅓ', 'ㅗ', 'ㅜ', 'ㅡ', 'ㅣ', 'ㅐ', 'ㅔ'}
 LIAISON_CONSONANTS = {'ㄴ', 'ㄹ', 'ㅁ', 'ㅇ'}
 
-# --------- 유틸 ---------
+# 유틸 
 def safe_convert_hangul(text: str) -> str:
     for hangul, english in HANGUL_TO_ENGLISH.items():
         text = text.replace(hangul, english)
@@ -138,7 +138,7 @@ def add_boundary_points(points: List[Point], img_shape, is_tongue=False) -> List
     enhanced.extend([(1,1),(w-2,1),(w-2,h-2),(1,h-2)])
     return enhanced
 
-# --------- 색상/밝기 유틸 ---------
+# 색상/밝기 유틸 
 COLOR_EMA = {'tongue': None, 'mouth': None}
 
 def mean_std_in_mask(img: np.ndarray, mask: np.ndarray):
@@ -159,7 +159,7 @@ def match_color_to_target(img: np.ndarray, mask: np.ndarray, target_mean: np.nda
         out[:,:,c] = (out[:,:,c] - m[c]) * (target_std[c] / s[c]) + target_mean[c]
     return np.clip(out, 0, 255).astype(np.uint8)
 
-# --------- 삼각분할 계산 및 캐시 ---------
+#  삼각분할 계산 및 캐시 
 class TriangulationCache:
     def __init__(self):
         self.cache = {}  # key: (w,h,n_points, is_tongue) -> List[Tuple[int,int,int]]
