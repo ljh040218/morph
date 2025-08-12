@@ -1,0 +1,27 @@
+{
+  "total_transitions": 1922,
+  "transition_type_counts": {
+    "vowel_to_vowel": 180,
+    "vowel_to_consonant": 420,
+    "rest_transition": 62,
+    "consonant_to_vowel": 420,
+    "same_position": 172,
+    "consonant_to_consonant": 668
+  },
+  "difficulty_distribution": {
+    "easy": 414,
+    "medium": 840,
+    "hard": 668
+  },
+  "average_frames_by_type": {
+    "vowel_to_vowel": 14.6,
+    "vowel_to_consonant": 18.0,
+    "rest_transition": 7.3,
+    "consonant_to_vowel": 12.0,
+    "same_position": 4.3,
+    "consonant_to_consonant": 18.6
+  },
+  "max_real_distance": 68.1,
+  "min_real_distance": 0.0,
+  "avg_real_distance": 21.28
+}
